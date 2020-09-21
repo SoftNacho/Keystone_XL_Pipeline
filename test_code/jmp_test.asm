@@ -1,0 +1,44 @@
+ORIGIN 0
+SEGMENT CodeSegment:
+
+Start: 
+	ADD R0, R0, -1
+	LDR R2, R1, ADDR
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	LDR R0, R0, ICACHEMISS
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	LDR R0, R0, ICACHEMISS
+	BRnzp Failed
+
+ICACHEMISS : DATA2 4xFFFF
+ADDR : DATA2 4x0024
+BAD : DATA2 4xBADD
+GOOD : DATA2 4x600D
+
+Passed:
+	LDR R7, R1, GOOD
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	BRnzp Passed
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+Failed:
+	LDR R7, R1, BAD
+	BRnzp Failed
+

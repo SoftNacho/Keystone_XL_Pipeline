@@ -1,0 +1,45 @@
+Bug lofg file for MP3 - KeystoneXL Pipeline
+
+_________________________________________________________________
+MP3 - Checkpoint 1
+_________________________________________________________________
++Problems with op_br: when adding op_br to control ROM file (even just case) crashes the simulation
++Checked if op_br declared in lc3b_types: done, still not working. 
++when simulating, load_pc has an 'x' value in control word. 
++May not exist anymore or may not have default value. 
++Changed load_pc default's value to 0, which fixed the first simulation problem. 
++Breaks when fetch instruction for NOP or branch. 
++PC goes to xFFCA before going back to 0. P
++roblem with branch enable of Fetch stage.
++Try moving nzp (CCcomp) from EX stage to ID stage to give time to process and get right branch ena
++right now (before change) comparing wrong values.
++Part of problem fixed, but PC goes down: branches back to a NOP.
++sr2_out goes to 6, dk why. NVM coming from PCOffset (normal).
++Looking at AdderMux and tracing back, coming from adder, taking address from 3 stages before.
++Try add extra NOP to testcode to create some sort of delay since the right address is passed in ev
++Problem may come from the way PC is loaded: in pcmux, if branch chooses mux entry b, although shou
++Will move CCcomp to write back with genCC and create CC reg with load_CC in control word.
++Need to relocate br_taken generation to write back stage.
++reuse branch enable as pcmux_sel in fetch stage.
++TEst method: BRp -- works
++BRnzp to prove all comparisons work -- works
+
+
+_________________________________________________________________
+MP3 - Checkpoint 2
+_________________________________________________________________ 
+
+
+_________________________________________________________________
+MP3 - Checkpoint 3
+_________________________________________________________________
+
+
+_________________________________________________________________
+MP3 - Checkpoint 4
+_________________________________________________________________
+
+
+_________________________________________________________________
+MP3 - Checkpoint 5
+_________________________________________________________________
